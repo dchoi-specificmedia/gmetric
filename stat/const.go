@@ -7,8 +7,8 @@ const (
 	Pending = "pending"
 	//CounterValueKey represents counter key
 	CounterValueKey = "count"
-	//CounterMineKey min key
-	CounterMineKey = "min"
+	//CounterMinKey min key
+	CounterMinKey = "min"
 	//CounterMaxKey max key
 	CounterMaxKey = "max"
 	//CounterAvgKey avg

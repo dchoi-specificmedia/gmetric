@@ -54,6 +54,14 @@ func (s *Service) Counter(location, name, description string) *Counter {
 
 //LookupOperation returns operation counters
 func (s *Service) LookupOperation(name string) *Operation {
+	op := s.lookupOperation(name)
+	if op != nil {
+		op.Clean()
+	}
+	return nil
+}
+
+func (s *Service) lookupOperation(name string) *Operation {
 	for _, candidate := range s.operations {
 		if candidate.Name == name {
 			return &candidate
@@ -66,12 +74,12 @@ var errMetric = errors.New("metric error")
 
 //LookupOperationRecentMetric returns operation metric current bucket value
 func (s *Service) LookupOperationRecentMetric(operationName, metric string) int64 {
-	operation := s.LookupOperation(operationName)
+	operation := s.lookupOperation(operationName)
 	if operation == nil {
 		return 0
 	}
-	recentIndex := operation.Index(time.Now())
-	counterMetrics := operation.Recent[recentIndex]
+
+	counterMetrics := operation.GetRecent(time.Now())
 	isPct := len(metric) > len(stat.CounterPctKey) && strings.HasSuffix(metric, stat.CounterPctKey)
 	if isPct {
 		if index := strings.LastIndex(metric, "."); index != -1 {
@@ -87,18 +95,17 @@ func (s *Service) LookupOperationRecentMetric(operationName, metric string) int6
 
 //LookupOperationRecentMetrics returns operation metrics current bucket values
 func (s *Service) LookupOperationRecentMetrics(operationName string) counter.Operation {
-	operation := s.LookupOperation(operationName)
+	operation := s.lookupOperation(operationName)
 	if operation == nil {
 		return counter.Operation{}
 	}
-	recentIndex := operation.Index(time.Now())
-	counterMetrics := operation.Recent[recentIndex]
+	counterMetrics := operation.GetRecent(time.Now())
 	return *counterMetrics
 }
 
 //LookupOperationCumulativeMetric returns operation metric cumulative value
 func (s *Service) LookupOperationCumulativeMetric(operationName, metric string) int64 {
-	operation := s.LookupOperation(operationName)
+	operation := s.lookupOperation(operationName)
 	if operation == nil {
 		return 0
 	}
@@ -120,7 +127,7 @@ func (s *Service) getCounterValue(metric string, operation *counter.Operation, v
 	switch metric {
 	case stat.CounterValueKey:
 		return operation.CountValue()
-	case stat.CounterMineKey:
+	case stat.CounterMinKey:
 		return atomic.LoadInt64(&operation.Min)
 	case stat.CounterMaxKey:
 		return atomic.LoadInt64(&operation.Max)

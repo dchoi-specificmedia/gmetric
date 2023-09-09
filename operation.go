@@ -1,9 +1,10 @@
 package gmetric
 
 import (
+	"time"
+
 	"github.com/viant/gmetric/counter"
 	"github.com/viant/gmetric/window"
-	"time"
 )
 
 //Operation represents named counters metrics

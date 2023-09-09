@@ -17,11 +17,18 @@ type Operation struct {
 	Min       int64
 	Avg       int32
 	timeUnit  time.Duration
+
+	expires time.Time
+	time    time.Time
 }
 
 //Begin begins count an event
 func (o *Operation) Begin(started time.Time) OnDone {
 	return o.BeginWithInc(1, started)
+}
+
+func (o *Operation) Before(other time.Time) bool {
+	return o.time.Before(other)
 }
 
 //BeginWithInc begins count an event
@@ -64,7 +71,11 @@ func NewOperation(timeUnit time.Duration, provider Provider) *Operation {
 			provider: provider,
 			locker:   &sync.Mutex{},
 		},
+
+		timeUnit: timeUnit,
+		time:     time.Now(),
 	}
+
 	customProvider, _ := provider.(CustomProvider)
 	if provider != nil {
 		op.Counters = make([]*Value, len(provider.Keys()))
@@ -82,7 +93,6 @@ func NewOperation(timeUnit time.Duration, provider Provider) *Operation {
 			}
 		}
 	}
-	op.timeUnit = timeUnit
 
 	return op
 }
