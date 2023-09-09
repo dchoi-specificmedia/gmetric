@@ -1,6 +1,6 @@
 package counter
 
-import "github.com/viant/gmetric/stat"
+import "github.com/dchoi-specificmedia/gmetric/stat"
 
 //NormalizeValue normalize stat values
 func NormalizeValue(values []interface{}) []interface{} {

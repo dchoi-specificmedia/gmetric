@@ -1,6 +1,6 @@
 package gmetric
 
-import "github.com/viant/gmetric/counter"
+import "github.com/dchoi-specificmedia/gmetric/counter"
 
 //Counter represents a counter
 type Counter struct {

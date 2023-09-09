@@ -3,8 +3,8 @@ package counter
 import (
 	"errors"
 	"github.com/stretchr/testify/assert"
-	"github.com/viant/gmetric/counter/base"
-	"github.com/viant/gmetric/stat"
+	"github.com/dchoi-specificmedia/gmetric/counter/base"
+	"github.com/dchoi-specificmedia/gmetric/stat"
 	"testing"
 	"time"
 )

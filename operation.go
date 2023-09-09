@@ -3,8 +3,8 @@ package gmetric
 import (
 	"time"
 
-	"github.com/viant/gmetric/counter"
-	"github.com/viant/gmetric/window"
+	"github.com/dchoi-specificmedia/gmetric/counter"
+	"github.com/dchoi-specificmedia/gmetric/window"
 )
 
 //Operation represents named counters metrics

@@ -1,7 +1,7 @@
 package base
 
 import (
-	"github.com/viant/gmetric/stat"
+	"github.com/dchoi-specificmedia/gmetric/stat"
 	"github.com/viant/toolbox"
 )
 

@@ -2,9 +2,9 @@ package gmetric_test
 
 import (
 	"errors"
-	"github.com/viant/gmetric"
-	"github.com/viant/gmetric/counter/base"
-	"github.com/viant/gmetric/stat"
+	"github.com/dchoi-specificmedia/gmetric"
+	"github.com/dchoi-specificmedia/gmetric/counter/base"
+	"github.com/dchoi-specificmedia/gmetric/stat"
 	"log"
 	"math/rand"
 	"net/http"

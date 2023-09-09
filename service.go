@@ -7,8 +7,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/viant/gmetric/counter"
-	"github.com/viant/gmetric/stat"
+	"github.com/dchoi-specificmedia/gmetric/counter"
+	"github.com/dchoi-specificmedia/gmetric/stat"
 )
 
 //Service represents operation metrics

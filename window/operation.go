@@ -5,7 +5,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/viant/gmetric/counter"
+	"github.com/dchoi-specificmedia/gmetric/counter"
 )
 
 //OnCounterDone represents on on counter callback
